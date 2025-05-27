@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {IAuthState} from "@/utils/types/auth/index"
+import { IAuthState } from "@/utils/types/auth/index"
+import Cookies from 'js-cookie';
 
 
 const initialState: IAuthState = {
     isAuthenticated: false,
     user: null,
-    token: null
+    token:null
 };
-
 const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -18,6 +18,7 @@ const authSlice = createSlice({
         },
         setToken(state, action) {
             state.token = action.payload;
+            Cookies.set('token', action.payload, { expires: 7 });
         },
         setIsAuthenticated(state, action) {
             state.isAuthenticated = action.payload;
@@ -26,6 +27,7 @@ const authSlice = createSlice({
             state.isAuthenticated = false;
             state.user = null;
             state.token = null;
+            Cookies.remove('token');
         }
     }
 });

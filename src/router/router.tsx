@@ -1,33 +1,44 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter } from "react-router-dom";
 
-import Home from "@/views/home/Home";
-import Dashboard from "@/views/dashboard/Dashboard";
+import Home from "@/pages/home/Home";
+import Dashboard from "@/pages/dashboard/Dashboard";
 import Layout from "@/layouts/default";
 import DashboardLayout from "@/layouts/dashboard-layout";
+import AuthMiddleware from "@/middleware/authMiddleware";
+import Login from "@/pages/login";
+import Users from "@/pages/dashboard/users";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: null,
+    element: <Layout />,
     children: [
       {
-        element: <Layout />,
-        children: [
-          {
-            index: true,
-            element: <Home />,
-          },
-        ],
+        index: true,
+        element: <Home />,
       },
     ],
   },
   {
-    element: <DashboardLayout />,
+    element: (
+      <AuthMiddleware>
+        <DashboardLayout />
+      </AuthMiddleware>
+    ),
     children: [
       {
-        path: "dashboard",
+        path: "/dashboard",
         element: <Dashboard />,
       },
+      {
+        path: "/dashboard/users",
+        element: <Users />,
+      },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 

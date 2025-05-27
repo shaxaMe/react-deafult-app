@@ -4,7 +4,7 @@
         id: string;
         name: string;
     } | null;
-    token: string | null;
+    token?: string | null;
     setUser?: (user: IAuthState["user"]) => void;
     setToken?: (token: string | null) => void;
     setIsAuthenticated?: (isAuthenticated: boolean) => void;

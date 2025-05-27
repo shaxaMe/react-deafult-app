@@ -13,7 +13,6 @@ const useApi = axios.create({
 useApi.interceptors.request.use(
     (config) => {
         const token = store.getState().auth.token;
-        console.log("Request Config:", token);
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -29,7 +28,7 @@ useApi.interceptors.response.use(
     (error) => {
         if (error.response) {
             if (error.response.status === 401) {
-                console.error("Unauthorized access - redirecting to login");
+                 window.location.href = "/login";
             } else if (error.response.status === 404) {
                 console.error("Resource not found");
             } else if (error.response.status >= 500) {
