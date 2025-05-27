@@ -40,7 +40,7 @@ const Home = () => {
               <p>Token: {auth.token}</p>
             </div>
           ) : (
-            <p>No user data available</p>
+            <p>No user data</p>
           )}
         </div>
         <div>
