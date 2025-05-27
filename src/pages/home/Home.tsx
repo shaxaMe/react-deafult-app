@@ -27,7 +27,6 @@ const Home = () => {
     queryKey: ["todo-1",userId],
     queryFn: () => fetchTodo(),
     enabled: !!userId,
-    refetchOnWindowFocus: false,
   });
   return (
     <div>
